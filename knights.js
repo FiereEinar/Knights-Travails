@@ -52,6 +52,8 @@ const board = (() => {
     return { knightsTravails }
 })();
 
+
+// use this function if you want to test it in the console
 function test(x, y) {
     const boardArray = Array(8).fill().map(_ => Array(8).fill(0));
 
