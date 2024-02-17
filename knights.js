@@ -35,14 +35,14 @@ const board = (() => {
             // if we hit the target coords then we return the moves
             if (current.x === end[0] && current.y === end[1]) return current.moves;
             // if not then we add it to the visited 
-            visited.add(`${current.x, current.y}`);
+            visited.add(`${current.x}, ${current.y}`);
 
             // add all the possible moves to the queue
             for (const move of getPosibleMoves(current.x, current.y)) {
                 const newMove = new Move(move[0], move[1]);
                 current.moves.forEach((moves) => newMove.addMoves(moves)); // add the previous move taken
 
-                if (visited.has(`${newMove.x}, ${newMove.y}}`)) continue;
+                if (visited.has(`${newMove.x}, ${newMove.y}`)) continue;
 
                 queue.push(newMove);
             }
@@ -58,15 +58,20 @@ function test(x, y) {
     const boardArray = Array(8).fill().map(_ => Array(8).fill(0));
 
     const printBoard = (board) => {
-        console.log('-------------------------------');
+        let final = '';
+        
+        final = final.concat(
+          '-------------------------------------\n');
         for (let i = 0; i < 8; i++) {
             let string = '';
             for (let j = 0; j < 8; j++) {
                 string = string.concat(`${board[i][j]} | `);
             }
-            console.log(string)
-            console.log('-------------------------------');
+            final = final.concat(string + '\n');
+            final = final.concat(
+              '-------------------------------------\n');
         }
+        console.log(final);
     };
 
     const movesArray = board.knightsTravails(x, y);
